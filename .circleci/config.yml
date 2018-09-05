@@ -26,5 +26,5 @@ jobs:
             cd java-tutorial
             bazel build //:ProjectRunner
       - store_artifacts:
-          path: bazel-bin/ProjectRunner
+          path: java-tutorial/bazel-bin/ProjectRunner
 
