@@ -17,12 +17,14 @@ jobs:
       - run:
           name: Install bazel
           command: |
-            curl https://github.com/bazelbuild/bazel/releases/download/0.16.1/bazel-0.16.1-installer-linux-x86_64.sh -o bazel.sh
+            curl -L https://github.com/bazelbuild/bazel/releases/download/0.16.1/bazel-0.16.1-installer-linux-x86_64.sh -o bazel.sh
             chmod a+x bazel.sh
-            sudo bazel.sh
+            sudo ./bazel.sh
       - run:
           name: build-java
           command: |
             cd java-tutorial
             bazel build //:ProjectRunner
+      - store_artifacts:
+          path: bazel-bin/ProjectRunner
 
