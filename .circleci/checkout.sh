@@ -8,7 +8,8 @@ then
   export HOME=$(getent passwd $(id -un) | cut -d: -f6)
 fi
 
-echo "Repository URL $CIRCLE_REPOSITORY_URL"
+echo "Replacing ssh repository URL $CIRCLE_REPOSITORY_URL with HTTPS version"
+CIRCLE_REPOSITORY_URL="https://${CIRCLE_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
 
 if [ -e "${CIRCLE_WORKING_DIRECTORY}/.git" ]
 then
@@ -19,12 +20,6 @@ else
   cd ${CIRCLE_WORKING_DIRECTORY}
   git clone "$CIRCLE_REPOSITORY_URL" .
 fi
-
-
-
-
-
-
 
 if [ -n "$CIRCLE_TAG" ]
 then
