@@ -26,7 +26,9 @@ jobs:
             echo "Replacing ssh repository URL $CIRCLE_REPOSITORY_URL with HTTPS version"
             CIRCLE_REPOSITORY_URL="https://${CIRCLE_USERNAME}:${GH_ACCESS_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
 
-            if [ -e "${CIRCLE_WORKING_DIRECTORY}/.git" ]
+            #eval working directory for tilde
+            CIRCLE_WORKING_DIRECTORY=`eval echo $CIRCLE_WORKING_DIRECTORY`
+            if [ -e ${CIRCLE_WORKING_DIRECTORY}/.git ]
             then
               cd ${CIRCLE_WORKING_DIRECTORY}
               git remote set-url origin "$CIRCLE_REPOSITORY_URL" || true
